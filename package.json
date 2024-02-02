@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.5",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "convex": "^1.8.0",

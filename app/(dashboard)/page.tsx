@@ -1,9 +1,9 @@
 import { UserButton } from "@clerk/nextjs";
 
-export default function Home() {
+export default function DashboardPage() {
   return (
      <div>
-       This is a Auth Screen
+       
      </div>
   );
 }
