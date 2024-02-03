@@ -16,9 +16,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
                  <OrgSidebar/>
                <div className="h-full flex-1">
                   <Navbar />
-                OOOrgSidebar</div>
+                  {children}
+               </div>
             </div>
-             {children}
           </div>
        </main>
     );
