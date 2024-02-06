@@ -23,7 +23,7 @@ export const BoardList = ({
 }: BoardListProps) => {
   const data = useQuery(api.boards.get, { 
     orgId,
-    ...query,
+    ...query
   });
 
   if (data === undefined) {
@@ -75,7 +75,7 @@ export const BoardList = ({
             createdAt={board._creationTime}
             imageUrl={board.imageUrl}
             orgId={board.orgId}
-            isFavorite  //fututre error loading
+            isFavorite = {board.isFavorite}
             
           />
         ))}
