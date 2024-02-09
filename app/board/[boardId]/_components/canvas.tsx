@@ -5,6 +5,7 @@ import Participants from './Participants'
 import Toolbar from './Toolbar'
 import {nanoid} from "nanoid"
 import { useSelf, useStorage }  from "@/liveblocks.config"
+import  LayerPreview from './LayerPreview'
 import {  Camera, 
   CanvasMode, 
   CanvasState, 
@@ -164,7 +165,7 @@ return (
               key={layerId}
               id={layerId}
               onLayerPointerDown={()=>{}} 
-              selectionColor={null}
+              selectionColor="#000"
              />
           ))}
           <CursorsPresence />
