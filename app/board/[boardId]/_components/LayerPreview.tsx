@@ -3,6 +3,8 @@
 import { memo } from "react";
 import { Rectangle } from "./rectangle";
 import { Ellipse } from "./ellipse";
+import { Text } from "./text";
+import { Note } from "./note";
 import { colorToCss } from "@/lib/utils";
 import { LayerType } from "@/types/canvas";
 import { useStorage } from "@/liveblocks.config";
@@ -39,7 +41,7 @@ const LayerPreview = memo(({
             selectionColor={selectionColor}
           />   
         )
-        case LayerType.Ellipse:
+    case LayerType.Ellipse:
       return (
         <Ellipse
           id={id}
@@ -48,6 +50,27 @@ const LayerPreview = memo(({
           selectionColor={selectionColor}
         />
       );
+
+      case LayerType.Text:
+      return (
+        <Text
+          id={id}
+          layer={layer}
+          onPointerDown={onLayerPointerDown}
+          selectionColor={selectionColor}
+        />
+      );
+
+      case LayerType.Note:
+        return (
+          <Note
+            id={id}
+            layer={layer}
+            onPointerDown={onLayerPointerDown}
+            selectionColor={selectionColor}
+          />
+        );
+
     default:
         console.log("Unknown Layer Type")
         return null;
