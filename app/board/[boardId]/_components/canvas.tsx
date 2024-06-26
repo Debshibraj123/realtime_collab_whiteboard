@@ -43,6 +43,7 @@ const Canvas = ({ boardId }: CanvasProps) => {
   // const pencilDraft = useSelf((me) => me.presence.pencilDraft);
 
   const info = useSelf((me) => me.info)
+  console.log(info)
   const [canvasState, setCanvasState] = useState<CanvasState>({
     mode: CanvasMode.None
   })
