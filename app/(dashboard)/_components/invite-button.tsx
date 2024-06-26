@@ -4,7 +4,7 @@ import { OrganizationProfile } from "@clerk/nextjs";
 import {
   Dialog,
   DialogContent,
-  DialogTrigger
+  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
@@ -12,12 +12,13 @@ export const InviteButton = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">
+        {/* Adjusted the Button styling for a more distinct look */}
+        <Button variant="outline" className="border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300 ease-in-out">
           <Plus className="h-4 w-4 mr-2" />
           Invite members
         </Button>
       </DialogTrigger>
-      <DialogContent className="p-0 bg-transparent border-none max-w-[880px]">
+      <DialogContent className="p-6 bg-white shadow-xl rounded-lg max-w-[880px] border">
         <OrganizationProfile />
       </DialogContent>
     </Dialog>

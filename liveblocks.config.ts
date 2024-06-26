@@ -10,8 +10,7 @@ import { Layer, Color } from "@/types/canvas"
 
   
 const client = createClient({
-   throttle: 16,
-   authEndpoint: "/api/liveblocks-auth",
+   publicApiKey: "pk_dev__vcCUP0cA1GJOEHSnimIIHD9oHzItS0IYuExaIGLKnb3D3DmwRKXdg2QvM2yTKps",
 });
 
 // Presence represents the properties that exist on every user in the Room

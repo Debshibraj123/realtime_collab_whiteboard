@@ -3,6 +3,7 @@
 import { useOrganization } from "@clerk/nextjs";
 import { EmptyOrg } from "./_components/Emptyorg";
 import {BoardList} from './_components/BoardList'
+import Home  from './_components/Home';
 
 interface DashboardPageProps {
   searchParams: {
@@ -16,6 +17,7 @@ const DashboardPage = ({
 }: DashboardPageProps) => {
   const { organization } = useOrganization();
 
+
   return ( 
     <div className="flex-1 h-[calc(100%-80px)] p-6">
       
@@ -27,8 +29,9 @@ const DashboardPage = ({
           query={searchParams}
         />
       )}
+      {/* <Home /> */}
     </div>
-   );
+  );
 };
  
 export default DashboardPage;

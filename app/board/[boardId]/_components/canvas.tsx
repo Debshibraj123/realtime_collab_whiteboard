@@ -40,6 +40,7 @@ interface CanvasProps {
 const Canvas = ({ boardId }: CanvasProps) => {
 
   const layerIds = useStorage((root) => root.layerIds)
+  const pencilDraft = useSelf((me) => me.presence.pencilDraft);
 
   const info = useSelf((me) => me.info)
   const [canvasState, setCanvasState] = useState<CanvasState>({
@@ -124,7 +125,17 @@ const Canvas = ({ boardId }: CanvasProps) => {
     setMyPresence({ selection: ids });
   }, [layerIds]);
 
-
+  
+  const startDrawing = useMutation((
+    { setMyPresence },
+    point: Point,
+    pressure: number,
+  ) => {
+    setMyPresence({
+      pencilDraft: [[point.x, point.y, pressure]],
+      penColor: lastUsedColor,
+    })
+  }, [lastUsedColor]);
 
   const resizeSelectedLayer = useMutation((
     { storage, self },
@@ -249,13 +260,13 @@ const Canvas = ({ boardId }: CanvasProps) => {
       return;
     }
 
-    // if (canvasState.mode === CanvasMode.Pencil) {
-    //   startDrawing(point, e.pressure);
-    //   return;
-    // }
+    if (canvasState.mode === CanvasMode.Pencil) {
+      startDrawing(point, e.pressure);
+      return;
+    }
 
-    setCanvasState({ origin: point, mode: CanvasMode.Pressing });
-  }, [camera, canvasState.mode, setCanvasState]);
+    setCanvasState({ origin: point, mode: CanvasMode.Pressing ,});
+  }, [camera, canvasState.mode, setCanvasState,  startDrawing]);
 
   const onPointerUp = useMutation((
     { },
