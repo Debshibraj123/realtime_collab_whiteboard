@@ -15,6 +15,7 @@ Features:
 -  Favoriting functionality
 -  Next.js 14 framework
 -  TailwindCSS & ShadcnUI styling
+-  RealTime Live Chat With Your Teammates
 
 
 

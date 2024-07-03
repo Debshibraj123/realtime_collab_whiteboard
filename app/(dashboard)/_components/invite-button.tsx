@@ -13,7 +13,7 @@ export const InviteButton = () => {
     <Dialog>
       <DialogTrigger asChild>
         {/* Adjusted the Button styling for a more distinct look */}
-        <Button variant="outline" className="border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition-colors duration-300 ease-in-out">
+        <Button variant="outline" className="border-2 border-black text-black-500   transition-colors duration-300 ease-in-out">
           <Plus className="h-4 w-4 mr-2" />
           Invite members
         </Button>
