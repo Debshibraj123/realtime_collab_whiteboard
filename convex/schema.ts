@@ -25,6 +25,23 @@ export default defineSchema({
     .index("by_board", ['boardId'])
     .index("by_user_org", [ "userId", "orgId"])
     .index("by_user_board", ["userId", "boardId"])
-    .index("by_user_board_org", ["userId", "boardId", "orgId"])
+    .index("by_user_board_org", ["userId", "boardId", "orgId"]),
+
+    //message table for user in organization can chat only
+    messages: defineTable({
+      orgId: v.string(),
+      userId: v.string(),
+      boardId: v.id("boards"),
+      content: v.string(),
+      author: v.string(),
+      createdAt: v.number()
+    })
+    .index("by_board", ['boardId'])
+    .index("by_org", ['orgId'])
+    .index("by_user", ['userId'])
+    .index("by_createdAt", ["createdAt"])
+  
+    
+
 
 })

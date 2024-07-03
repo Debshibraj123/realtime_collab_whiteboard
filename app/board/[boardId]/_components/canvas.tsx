@@ -414,6 +414,8 @@ const Canvas = ({ boardId }: CanvasProps) => {
           <CursorsPresence />
         </g>
       </svg>
+
+      
     </main>
   )
 }
