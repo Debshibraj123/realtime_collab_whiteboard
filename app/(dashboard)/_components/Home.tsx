@@ -14,7 +14,7 @@ const Home = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
-              href="/signup"
+              href="/dashboard"
               className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center"
             >
               Get Started Free <ArrowRight className="ml-2 h-5 w-5" />

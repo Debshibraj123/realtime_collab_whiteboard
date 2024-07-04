@@ -7,11 +7,15 @@ import ChatComponent from "./_components/ChatComponent";
 import { useOrganizationList } from "@clerk/nextjs";
 import { Id } from "@/convex/_generated/dataModel";
 import { Button } from "@/components/ui/button";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Brain } from "lucide-react";
+import BrainstormingTool from "./_components/BrainstormingTool";
+import { useMutation } from 'convex/react';
+import { api } from '@/convex/_generated/api';
+import 'reactflow/dist/style.css';
 
 interface BoardIdPageProps {
   params: {
-    boardId: string;
+    boardId: string; // This will be a string, we will convert it to Id<"boards"> when necessary
   };
 }
 
@@ -19,12 +23,25 @@ const BoardIdPage = ({ params }: BoardIdPageProps) => {
   const { organizationList, isLoaded } = useOrganizationList();
   const [orgId, setOrgId] = useState<string>("");
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isBrainstormOpen, setIsBrainstormOpen] = useState(false);
+  const [brainstormSessionId, setBrainstormSessionId] = useState<Id<"brainstormSessions"> | null>(null);
+
+  const createSession = useMutation(api.brainstorm.createSession);
 
   useEffect(() => {
     if (isLoaded && organizationList.length > 0) {
       setOrgId(organizationList[0].organization.id);
     }
   }, [isLoaded, organizationList]);
+
+  useEffect(() => {
+    if (isBrainstormOpen && !brainstormSessionId) {
+      const boardId: Id<"boards"> = params.boardId as Id<"boards">; // Convert string to Id<"boards">
+      createSession({ boardId, title: 'New Session' }).then(session => {
+        setBrainstormSessionId(session);
+      });
+    }
+  }, [isBrainstormOpen, brainstormSessionId, createSession, params.boardId]);
 
   if (!isLoaded) {
     return (
@@ -52,7 +69,14 @@ const BoardIdPage = ({ params }: BoardIdPageProps) => {
       }
     >
       <div className="relative h-full">
-        <div className="absolute bottom-10 right-0 z-10">
+        <div className="absolute bottom-10 right-0 z-10 flex flex-col space-y-2">
+          <Button
+            onClick={() => setIsBrainstormOpen(!isBrainstormOpen)}
+            variant="outline"
+            size="icon"
+          >
+            <Brain className="h-4 w-4" />
+          </Button>
           <Button
             onClick={() => setIsChatOpen(!isChatOpen)}
             variant="outline"
@@ -62,7 +86,7 @@ const BoardIdPage = ({ params }: BoardIdPageProps) => {
           </Button>
         </div>
         <div className="h-full">
-          <Canvas boardId={params.boardId} />
+          <Canvas boardId={params.boardId as Id<"boards">} />
         </div>
         <div
           className={`fixed top-0 right-0 h-full w-1/2 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
@@ -71,6 +95,24 @@ const BoardIdPage = ({ params }: BoardIdPageProps) => {
         >
           <div className="h-full">
             <ChatComponent orgId={orgId} boardId={params.boardId as Id<"boards">} onClose={() => setIsChatOpen(false)} />
+          </div>
+        </div>
+        <div
+          className={`fixed top-0 left-0 h-full w-1/2 bg-white shadow-lg transform transition-transform duration-300 ease-in-out ${
+            isBrainstormOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
+          <div className="h-full">
+            {brainstormSessionId && (
+              <BrainstormingTool  />
+            )}
+            <Button
+              onClick={() => setIsBrainstormOpen(false)}
+              className="absolute top-4 right-4"
+              variant="outline"
+            >
+              Close
+            </Button>
           </div>
         </div>
       </div>

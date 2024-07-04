@@ -16,6 +16,7 @@ import type {
 } from "convex/server";
 import type * as board from "../board.js";
 import type * as boards from "../boards.js";
+import type * as brainstorm from "../brainstorm.js";
 import type * as chat from "../chat.js";
 
 /**
@@ -29,6 +30,7 @@ import type * as chat from "../chat.js";
 declare const fullApi: ApiFromModules<{
   board: typeof board;
   boards: typeof boards;
+  brainstorm: typeof brainstorm;
   chat: typeof chat;
 }>;
 export declare const api: FilterApi<

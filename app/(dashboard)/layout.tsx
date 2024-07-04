@@ -10,7 +10,7 @@ interface DashboardLayoutProps {
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     return (
        <main className="h-full">
-          <Sidebar />
+          {/* <Sidebar /> */}
           <div className="pl-[60px] h-full">
             <div className="flex gap-x-3 h-full">
                  <OrgSidebar/>
